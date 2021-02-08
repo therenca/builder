@@ -1,3 +1,3 @@
-library builder;
-
-export 'src/build.dart';
+int calculate() {
+  return 6 * 7;
+}
