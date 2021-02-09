@@ -12,3 +12,4 @@ rsync:
   # assumes you are accessing the remote machine using ssh key, if not, this will fail
   user: user
   ip: ip address
+  path: /path/to/folder # where to dump the builds and config files

@@ -19,6 +19,7 @@ rsync:
   # assumes you are accessing the remote machine using ssh key, if not, this will fail
   user: user
   ip: ip address
+  path: /path/to/folder/ # where to dump the builds and config files
 ```
 
 The builder takes two arguments. The first parameter tells the builder what to do. Either sync the config to the server or build the binaries for the server, or both. The second parameter is the location of the yaml file as follows:
