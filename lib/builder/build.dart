@@ -48,7 +48,7 @@ class Build {
 
 	static rsync(String ip, String user, String path, String targetFolder){
 		try {
-			"rsync -rvz -e 'ssh' --progress $targetFolder $user@$ip:path".run;
+			"rsync -rvz -e 'ssh' --progress $targetFolder $user@$ip:$path".run;
 		} catch(e){
 			leo.pretifyOutput('[BUILDER | sync] unable to sync with $ip', color: 'red');
 		}
