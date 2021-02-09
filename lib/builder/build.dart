@@ -37,7 +37,6 @@ class Build {
 	}
 
 	static void copy(yaml.YamlList confFolders, String targetFolder){
-
 		confFolders.forEach((conf) {
 			try {
 				'cp -rvf $conf $targetFolder/'.run;

@@ -6,10 +6,10 @@ import 'package:builder/builder/build.dart';
 
 void main(List<String> args) async {
 
-	if(args.isNotEmpty && args.length > 1){
+	if(args.isNotEmpty && args.length == 2){
 
 		var _getFileHelper = () async {
-			var yamlFile = File(args[1]);
+			var yamlFile = File(args.last);
 			return await yamlFile.readAsString();
 		};
 
@@ -18,8 +18,6 @@ void main(List<String> args) async {
 
 		if(yamlBlob != null){
 			var yamlDoc = yaml.loadYaml(yamlBlob);
-
-			print('yaml doc: $yamlDoc');
 
 			var targetFolder = yamlDoc['folder'];
 			var confFiles = yamlDoc['conf'];
@@ -52,8 +50,7 @@ void main(List<String> args) async {
 				}
 
 				case 'build': {
-					var toBuild;
-
+					
 					Build.mkdir(targetFolder);
 					Build.aot(toBuild, targetFolder);
 					Build.rsync(ip, user, remotePath, targetFolder);

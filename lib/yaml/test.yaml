@@ -1,14 +1,14 @@
-folder: production
+folder: production # folder the builds and confs will be dumped to
 conf:
   # path to conf folders / files
   - ~/projects/project-name/lib/conf/conf1
   - ~/projects/project-name/lib/conf/conf2
-
 
 build:
   # path to dart files to compile
   - ~/projects/project-name/bin/main.dart, program-name
 
 rsync:
+  # assumes you are accessing the remote machine using ssh key, if not, this will fail
   user: user
   ip: ip address
