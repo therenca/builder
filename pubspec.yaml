@@ -1,17 +1,18 @@
 name: builder
 description: Compiles dart code to an AOT bundle, also syncs config files accordingly
 version: 1.0.0
-author: Therenca Mureithi <therencamureithi@gmail.com>
 homepage: 'https://github.com/therenca/builder'
+publish_to: none
 
 environment:
-  sdk: '>=2.10.0 <3.0.0'
+  sdk: '>=2.16.0 <3.0.0'
 
 dependencies:
- yaml: ^2.2.1
- leo: ^1.0.3
- dcli: ^0.41.12
+ yaml: ^3.1.0
+ leo:
+  path: ../../leo
+ dcli: ^1.30.1
 
 dev_dependencies:
-  pedantic: ^1.9.0
-  test: ^1.14.4
+  pedantic: ^1.11.1
+  test: ^1.21.0

@@ -20,7 +20,7 @@ class Build {
 			var builtTo = buildParts[1];
 			
 			try {
-				'dart2native $toBuild -o $builtTo'.run;
+				'dart compile exe $toBuild -o $builtTo'.run;
 				isMove = true;
 			} catch(e){
 				leo.pretifyOutput('[BUILDER | aot] unable to build $toBuild', color: 'red');
