@@ -13,3 +13,6 @@ rsync:
   user: user
   ip: ip address
   path: /path/to/folder # where to dump the builds and config files
+
+commands:
+  # remote commands to execute on the server

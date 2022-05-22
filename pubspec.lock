@@ -256,7 +256,7 @@ packages:
   leo:
     dependency: "direct main"
     description:
-      path: "../../leo"
+      path: "../leo"
       relative: true
     source: path
     version: "1.0.4+4"

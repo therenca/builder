@@ -53,6 +53,16 @@ class Build {
 			leo.pretifyOutput('[BUILDER | sync] unable to sync with $ip', color: 'red');
 		}
 	}
+	
+	static execute(String ip, String user, yaml.YamlList commands){
+		for(var command in commands){
+			try {
+				"ssh $user@$ip $command".run;
+			} catch(e){
+				leo.pretifyOutput('[BUILDER | execute] unable to run $command', color: 'red');
+			}
+		}
+	}
 
 	static rm(String path){
 		"rm -rvf $path".run;

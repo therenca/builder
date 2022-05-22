@@ -22,6 +22,7 @@ void main(List<String> args) async {
 			var targetFolder = yamlDoc['folder'];
 			var confFiles = yamlDoc['conf'];
 			var toBuild = yamlDoc['build'];
+			var commands = yamlDoc['commands'];
 
 			var ip;
 			var user;
@@ -38,40 +39,38 @@ void main(List<String> args) async {
 			toBuild ??= <yaml.YamlList>[];
 
 			switch(args.first){
-
 				case 'config': {
-
 					Build.mkdir(targetFolder);
 					Build.copy(confFiles, targetFolder);
 					Build.rsync(ip, user, remotePath, targetFolder);
+					Build.execute(ip, user, commands);
 					Build.rm(targetFolder);
 
 					break;
 				}
 
 				case 'build': {
-					
 					Build.mkdir(targetFolder);
 					Build.aot(toBuild, targetFolder);
 					Build.rsync(ip, user, remotePath, targetFolder);
+					Build.execute(ip, user, commands);
 					Build.rm(targetFolder);
 
 					break;
 				}
 
 				case 'all': {
-
 					Build.mkdir(targetFolder);
 					Build.aot(toBuild, targetFolder);
 					Build.copy(confFiles, targetFolder);
 					Build.rsync(ip, user, remotePath, targetFolder);
+					Build.execute(ip, user, commands);
 					Build.rm(targetFolder);
 
 					break;
 				}
 
 				default: {
-
 					leo.pretifyOutput('[BUILDER] expected values are action "config" or "build" or "all"', color: 'red');
 
 					break;
