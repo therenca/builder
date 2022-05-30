@@ -22,6 +22,7 @@ rsync:
   path: /path/to/folder/ # where to dump the builds and config files
 
 commands:
+  # these commands will run after everything has been synced to the remote server
   - mkdir -p /path/to/folder
   - kill 21322
   - systemctl restart service
