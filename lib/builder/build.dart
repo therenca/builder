@@ -8,7 +8,7 @@ class Build {
 			'mkdir $folder'.run;
 			'mkdir $folder/conf/'.run;
 		} catch(e){
-			leo.pretifyOutput('[BUILDER | $folder] unable to run mkdir', color: 'red');
+			leo.pretifyOutput('[BUILDER | $folder] unable to run mkdir', color: leo.Color.red);
 		}
 	}
 
@@ -16,21 +16,30 @@ class Build {
 		toBuild.forEach((build) {
 			var isMove = false;
 			var buildParts = build.split(',');
-			var toBuild = buildParts[0];
-			var builtTo = buildParts[1];
+			var toBuild = buildParts[0] as String;
+			var builtTo = buildParts[1] as String;
 			
 			try {
 				'dart compile exe $toBuild -o $builtTo'.run;
 				isMove = true;
 			} catch(e){
-				leo.pretifyOutput('[BUILDER | aot] unable to build $toBuild', color: 'red');
+				leo.pretifyOutput('[BUILDER | aot] unable to build $toBuild', color: leo.Color.red);
 			}
 
+			var _folder = targetFolder;
 			if(isMove){
 				try {
-					'mv -v $builtTo $targetFolder/'.run;
+					if(builtTo.contains('/') == true){
+						var temp = builtTo.split('/');
+						temp.removeAt(temp.length - 1);
+						for(var _dir in temp){
+							_folder += '/$_dir';
+						}
+						'mkdir -p $_folder'.run;
+					}
+					'mv -v $builtTo $_folder/'.run;
 				} catch(e){
-					leo.pretifyOutput('[BUILDER | move] unable to move $builtTo to $targetFolder', color: 'red');
+					leo.pretifyOutput('[BUILDER | move] unable to move $builtTo to $_folder', color: leo.Color.red);
 				}
 			}
 		});
@@ -41,7 +50,7 @@ class Build {
 			try {
 				'cp -rvf $conf $targetFolder/'.run;
 			} catch(e){
-				leo.pretifyOutput('[BUILDER | copy | $conf] unable to run copy', color: 'red');
+				leo.pretifyOutput('[BUILDER | copy | $conf] unable to run copy', color: leo.Color.red);
 			}
 		});
 	}
@@ -50,7 +59,7 @@ class Build {
 		try {
 			"rsync -rvz -e 'ssh' --progress $targetFolder $user@$ip:$path".run;
 		} catch(e){
-			leo.pretifyOutput('[BUILDER | sync] unable to sync with $ip', color: 'red');
+			leo.pretifyOutput('[BUILDER | sync] unable to sync with $ip', color: leo.Color.red);
 		}
 	}
 	
@@ -59,7 +68,7 @@ class Build {
 			try {
 				"ssh $user@$ip $command".run;
 			} catch(e){
-				leo.pretifyOutput('[BUILDER | execute] unable to run $command', color: 'red');
+				leo.pretifyOutput('[BUILDER | execute] unable to run $command', color: leo.Color.red);
 			}
 		}
 	}

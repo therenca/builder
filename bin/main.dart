@@ -37,6 +37,7 @@ void main(List<String> args) async {
 			targetFolder ??= 'production';
 			confFiles ??= <yaml.YamlList>[];
 			toBuild ??= <yaml.YamlList>[];
+			commands ??= <yaml.YamlList>[];
 
 			switch(args.first){
 				case 'config': {
@@ -71,15 +72,15 @@ void main(List<String> args) async {
 				}
 
 				default: {
-					leo.pretifyOutput('[BUILDER] expected values are action "config" or "build" or "all"', color: 'red');
+					leo.pretifyOutput('[BUILDER] expected values are action "config" or "build" or "all"', color: leo.Color.red);
 
 					break;
 				}
 			}
 		} else {
-			leo.pretifyOutput('[BUILDER] yaml file: ${args[1]} does not exist', color: 'red');
+			leo.pretifyOutput('[BUILDER] yaml file: ${args[1]} does not exist', color: leo.Color.red);
 		}
 	} else {
-		leo.pretifyOutput('[BUILDER] only one action needed, either action "config" or "build" or "all", also specify the path to the yaml file. EG: ./builder config /path/to/yaml', color: 'red');
+		leo.pretifyOutput('[BUILDER] only one action needed, either action "config" or "build" or "all", also specify the path to the yaml file. EG: ./builder config /path/to/yaml', color: leo.Color.red);
 	}
 }
