@@ -13,7 +13,8 @@ conf:
 
 build:
   # path to dart files to compile
-  - ~/projects/project-name/bin/main.dart, program-name
+  - ~/projects/project-name/bin/main.dart, program-name # on the remote side will reflec as production/program-name
+  - ~/projects/project-name/bin/main.dart, /path/to/program-name # on the remote side will reflect as production/path/to/program-name
 
 rsync:
   # assumes you are accessing the remote machine using ssh key, if not, this will fail
