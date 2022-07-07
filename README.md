@@ -1,7 +1,6 @@
 #### Builder
 
 Compiles dart code to an AOT bundle, also syncs config files accordingly
-
 An example of a yaml with the relevant info would look like this:
 
 ```yaml
