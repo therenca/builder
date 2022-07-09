@@ -13,33 +13,38 @@ class Build {
 	}
 
 	static void aot(yaml.YamlList toBuild, String targetFolder){
+		
 		toBuild.forEach((build) {
 			var isMove = false;
 			var buildParts = build.split(',');
 			var toBuild = buildParts[0] as String;
 			var builtTo = buildParts[1] as String;
 			
+			late String programName;
+			var _folder = targetFolder;
+			if(builtTo.contains('/') == true){
+				var temp = builtTo.split('/');		
+				programName = temp.removeAt(temp.length - 1);
+				for(var _dir in temp){
+					_folder += '/$_dir';
+				}
+				'mkdir -p $_folder'.run;
+			} else {
+				programName = builtTo;
+			}
+			
 			try {
-				'dart compile exe $toBuild -o $builtTo'.run;
+				'dart compile exe $toBuild -o $programName'.run;
 				isMove = true;
 			} catch(e){
-				leo.pretifyOutput('[BUILDER | aot] unable to build $toBuild', color: leo.Color.red);
+				leo.pretifyOutput('[BUILDER | aot] unable to build $programName', color: leo.Color.red);
 			}
 
-			var _folder = targetFolder;
 			if(isMove){
 				try {
-					if(builtTo.contains('/') == true){
-						var temp = builtTo.split('/');
-						temp.removeAt(temp.length - 1);
-						for(var _dir in temp){
-							_folder += '/$_dir';
-						}
-						'mkdir -p $_folder'.run;
-					}
-					'mv -v $builtTo $_folder/'.run;
+					'mv -v $programName $_folder/'.run;
 				} catch(e){
-					leo.pretifyOutput('[BUILDER | move] unable to move $builtTo to $_folder', color: leo.Color.red);
+					leo.pretifyOutput('[BUILDER | move] unable to move $programName to $_folder', color: leo.Color.red);
 				}
 			}
 		});
