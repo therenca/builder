@@ -35,9 +35,9 @@ void main(List<String> args) async {
 			}
 
 			targetFolder ??= 'production';
-			confFiles ??= <yaml.YamlList>[];
-			toBuild ??= <yaml.YamlList>[];
-			commands ??= <yaml.YamlList>[];
+			confFiles ??= yaml.YamlList();
+			toBuild ??= yaml.YamlList();
+			commands ??= yaml.YamlList();
 
 			switch(args.first){
 				case 'config': {
